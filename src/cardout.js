@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,7 +7,8 @@ const CardOut = ({ record, onBack }) => {
   const sliderRef = useRef(null);
   const fullscreenRef = useRef(null);
 
-  const allPhotos = [record.bannerimage, ...record.photos.filter((photo) => photo !== record.bannerimage)];
+  // Memoizing the allPhotos array to avoid unnecessary re-renders
+  const allPhotos = useMemo(() => [record.bannerimage, ...record.photos.filter((photo) => photo !== record.bannerimage)], [record.bannerimage, record.photos]);
 
   const [fullscreenData, setFullscreenData] = useState({
     img: null,
@@ -188,12 +189,12 @@ const CardOut = ({ record, onBack }) => {
       </div>
 
       <div className="flex jcc aic text-center m-auto">
-      <button
-  className={`btn btn-secondary backbutton ${fullscreenData.img ? "d-none" : ""}`}
-  onClick={onBack}
->
-  Back
-</button>
+        <button
+          className={`btn btn-secondary backbutton ${fullscreenData.img ? "d-none" : ""}`}
+          onClick={onBack}
+        >
+          Back
+        </button>
       </div>
 
       {/* Fullscreen viewer */}
