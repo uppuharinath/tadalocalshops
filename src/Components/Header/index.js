@@ -22,8 +22,8 @@ const Header = ({ searchInput, setSearchInput }) => {
   };
 
   return (
-    <div className="this1 header-wrapper">
-      <div className="header">
+    <div className="header-wrapper">
+      <div className="container header">
         <p className="text-center branding flex flex-column black jcsa jcc aic">
           <div>
             <strong>TADA :</strong> List your business card for ₹ 100/-
@@ -32,9 +32,10 @@ const Header = ({ searchInput, setSearchInput }) => {
         </p>
       </div>
 
+
       <div className="container">
         <div className="row flex jcc box-shadow1">
-          <div className="cyan col-6">
+          <div className="col-4">
             <Navbar />
           </div>
 

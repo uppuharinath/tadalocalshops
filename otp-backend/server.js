@@ -1,48 +1,54 @@
-// server.js
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const twilio = require('twilio');
 
 const app = express();
-app.use(cors());
+const port = 5000;
+
+// Twilio credentials
+const accountSid = 'your_account_sid'; // Get from your Twilio dashboard
+const authToken = 'your_auth_token'; // Get from your Twilio dashboard
+const client = new twilio(accountSid, authToken);
+
 app.use(bodyParser.json());
 
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const verifySid = process.env.TWILIO_VERIFY_SID;
-const client = twilio(accountSid, authToken);
-
-// Send OTP
-app.post('/send-otp', async (req, res) => {
+// Endpoint to send OTP
+app.post('/send-otp', (req, res) => {
   const { phone } = req.body;
-  try {
-    const verification = await client.verify.v2.services(verifySid)
-      .verifications
-      .create({ to: phone, channel: 'sms' });
-    res.status(200).send('OTP sent');
-  } catch (error) {
-    res.status(500).send('Failed to send OTP');
-  }
+
+  // Generate a random OTP (you can replace this with a more secure OTP generation method)
+  const otp = Math.floor(100000 + Math.random() * 900000); 
+
+  // Send OTP using Twilio
+  client.messages
+    .create({
+      body: `Your OTP code is: ${otp}`,
+      from: '+1234567890', // Your Twilio phone number
+      to: phone, // User's phone number
+    })
+    .then((message) => {
+      // Save OTP in memory or database (just for demo purposes, it's stored in memory)
+      req.app.locals.otp = otp;
+      res.json({ success: true, message: 'OTP sent successfully.' });
+    })
+    .catch((err) => {
+      console.error('Error sending OTP:', err);
+      res.status(500).json({ success: false, message: 'Failed to send OTP.' });
+    });
 });
 
-// Verify OTP
-app.post('/verify-otp', async (req, res) => {
+// Endpoint to verify OTP
+app.post('/verify-otp', (req, res) => {
   const { phone, code } = req.body;
-  try {
-    const verificationCheck = await client.verify.v2.services(verifySid)
-      .verificationChecks
-      .create({ to: phone, code });
-    if (verificationCheck.status === 'approved') {
-      res.status(200).send('OTP verified');
-    } else {
-      res.status(400).send('Invalid OTP');
-    }
-  } catch (error) {
-    res.status(500).send('Verification failed');
+
+  // Compare the entered OTP with the one stored in memory
+  if (code == req.app.locals.otp) {
+    res.json({ success: true, message: 'OTP verified successfully.' });
+  } else {
+    res.json({ success: false, message: 'Incorrect OTP.' });
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});

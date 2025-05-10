@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import Slider from "react-slick";
+import { useSwipeable } from "react-swipeable";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -73,48 +74,49 @@ const CardOut = ({ record, onBack }) => {
     autoplaySpeed: 3000,
   };
 
+  // Swipe handlers for navigating images
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => navigateImage("next"),
+    onSwipedRight: () => navigateImage("prev"),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
     <div className="container">
       <div className="row vh-80">
         <div className="col-6-ld box-shadow1 recorddetails">
-          <h2 className="text-center purple">{record.name}</h2>
-
+          <h2 className="text-center white">{record.name}</h2>
           <div className="about">
             <h3 className="white">About</h3>
-            <p className="cyan">{record.description}</p>
+            <p className="black bg-white">{record.description}</p>
           </div>
-
           <div className="locate">
             <h3 className="white">Location</h3>
             <p>Route - {record.address} towards {record.towards} Side</p>
-            <p>Location: <a href={record.location} target="_blank" rel="noopener noreferrer">View Map</a></p>
+            <p>Location: <a className="blue bg-white" href={record.location} target="_blank" rel="noopener noreferrer">View Map</a></p>
           </div>
-
           <div className="contact white">
             <h3 className="white">Contact</h3>
             <p><a className="contact white" href={`tel:${record.phone}`}>{record.phone}</a></p>
-            <p><a href={record.website} target="_blank" rel="noopener noreferrer">{record.website}</a></p>
+            <p><a href={record.website} target="_blank" rel="noopener noreferrer" className="blue bg-white">{record.website}</a></p>
           </div>
-
           <div className="open">
             <h3 className="white">Operating Hours</h3>
             <p>{record.open_hours}</p>
           </div>
-
           {record.specialties?.length > 0 && (
             <div className="specialties">
               <h3 className="white">Specialties</h3>
               {record.specialties.map((item, index) => <p key={index}>{item}</p>)}
             </div>
           )}
-
           {record.popular_brands?.length > 0 && (
             <div className="popular-brands">
               <h3 className="white">Popular Brands</h3>
               {record.popular_brands.map((brand, index) => <p key={index}>{brand}</p>)}
             </div>
           )}
-
           {record.services?.length > 0 && (
             <div className="services">
               <h3 className="white">Services</h3>
@@ -123,35 +125,30 @@ const CardOut = ({ record, onBack }) => {
               ))}
             </div>
           )}
-
           {record.payment_methods?.length > 0 && (
             <div className="payment-methods">
               <h3 className="white">Payment Methods</h3>
               {record.payment_methods.map((method, index) => <p key={index}>{method}</p>)}
             </div>
           )}
-
           {record.tags?.length > 0 && (
             <div className="tags">
               <h3 className="white">Tags</h3>
               {record.tags.map((tag, index) => <p key={index}>{tag}</p>)}
             </div>
           )}
-
           {record.parking && (
             <div className="parking">
               <h3 className="white">Parking</h3>
               <p>{record.parking}</p>
             </div>
           )}
-
           {record.offers && (
             <div className="offers">
               <h3 className="white">Offers</h3>
               <p>{record.offers}</p>
             </div>
           )}
-
           {record.rating && (
             <div className="rating">
               <h3 className="white">Rating</h3>
@@ -197,7 +194,6 @@ const CardOut = ({ record, onBack }) => {
         </button>
       </div>
 
-      {/* Fullscreen viewer */}
       {fullscreenData.img && (
         <div
           className="fullscreen"
@@ -215,6 +211,7 @@ const CardOut = ({ record, onBack }) => {
             alignItems: "center",
             zIndex: 9999,
           }}
+          {...swipeHandlers}  // Attach swipe handlers here
         >
           <img
             src={fullscreenData.img}

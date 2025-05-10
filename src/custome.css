@@ -186,7 +186,14 @@ margin:1rem 0;
 
 /* global css */
 .mt-1r{
+  margin-top:1rem;
+}
+.mt-2r{
   margin-top:2rem;
+}
+
+.pt-1r{
+  padding-top:1rem
 }
 
 
@@ -288,7 +295,7 @@ width:fit-content;
   object-fit: contain;
   transform: scale(1);
   border-radius: 10px;
-  border: 10px solid brown;
+  /* border: 10px solid brown; */
   border-radius: 20px;
   filter: brightness(100%) sepia(0) hue-rotate(0);
 }
@@ -785,24 +792,26 @@ background-color: rgba(0, 0, 0, 0.071);
   padding: 0.2rem 0.2rem;
 }
 
-.header-wrapper{
-  background-color: rgba(0, 0, 255, 0.463);
-  z-index: 9999;
-}
 
 
-body {
-  background: #000 !important; /* optional background color */
-  border: 20px solid black !important;
-  margin: 0; /* often needed to prevent unwanted spacing */
-  height: 100vh; /* full viewport height */
-  box-sizing: border-box;
+.main{
+  margin-top:1rem;
+  /* z-index: 111; */
 }
+
 
 .backbutton {
   position: fixed;
   bottom: 2rem !important;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10000;
+  z-index: 2;
+}
+
+
+.recorddetails h2{
+  border-bottom:5px solid black;
+  width:fit-content;
+  margin:auto;
+  margin-top:2rem;
 }

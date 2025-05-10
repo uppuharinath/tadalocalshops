@@ -10,7 +10,7 @@ const navItems = [
 
 const Navigation = () => {
   return (
-    <ul className=" flex flex-row col-12-ld cyan text-ld jcsa aic ">
+    <ul className=" flex flex-row col-12-ld cyan text-ld jcsa aic "?>>>>
       {navItems.map((item) => (
         <li key={item.id} className="alkdfj ">
           <a href={item.path} className="">

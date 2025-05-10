@@ -1,5 +1,4 @@
 import records from "../json/services.json";
-import Heading from "../Pages/heading";
 import { useState } from "react";
 import CardOut from "../../src/cardout";
 import { FaHotel } from "react-icons/fa";
@@ -7,6 +6,7 @@ import { TbAirConditioning } from "react-icons/tb";
 import { GiAutoRepair, GiNoodles } from "react-icons/gi";
 import { PiBuildingApartmentDuotone } from "react-icons/pi";
 import { SlBasket } from "react-icons/sl";
+import Heading from "./heading";
 
 const Body = ({ searchInput }) => {
   const [selectedRecord, setSelectedRecord] = useState(null);
@@ -45,16 +45,20 @@ const Body = ({ searchInput }) => {
   const uniqueCategories = [...new Set(records.map((r) => r.category))];
 
   return (
-    <div className="container">
+    <div className=" container main">
+      
       <Heading />
-
       {selectedRecord ? (
         <CardOut record={selectedRecord} onBack={handleBack} />
-      ) : (
+                        ) 
+                        : 
+      
+                      (
         <div className="category-container">
           {uniqueCategories.map((category) => (
             <div key={category} className="category-block">
-              <h2 className="text-center yellow black bg-blue box-shadow1">{category}s</h2>
+              <h2 className="bg-blue">{category}s 
+               &nbsp; <span className="text-black">({filteredRecords.filter((record) => record.category === category).length}) </span></h2>
               <div className="row jcsa asasas allcards">
                 {filteredRecords
                   .filter((record) => record.category === category)

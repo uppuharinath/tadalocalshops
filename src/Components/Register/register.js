@@ -1,162 +1,95 @@
-import React, { useState } from 'react';
-// import Heading from '../../Pages/heading';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../../../src/firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phoneNumber: '',
-  });
-  const [otpSent, setOtpSent] = useState(false);
-  const [userOtp, setUserOtp] = useState('');
-  const [otpVerified, setOtpVerified] = useState(false);
+function Register() {
+  const [phone, setPhone] = useState('');
+  const [otp, setOtp] = useState('');
+  const [confirmation, setConfirmation] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    // Ensure reCAPTCHA is set up only once when the component mounts
+    setupRecaptcha();
+  }, []);
 
-  // const isValidPhoneNumber = (phone) => {
-  //   const phoneRegex = /^[0-9]{10}$/;
-  //   return phoneRegex.test(phone);
-  // };
-
-  const sendOtp = () => {
-    const formattedPhone = `+91${formData.phoneNumber}`;
-    fetch('http://localhost:5000/send-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: formattedPhone }), // Adding +91 prefix
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        if (data.includes('OTP sent')) {
-          setOtpSent(true);
-          alert('OTP sent successfully to your phone!');
-        } else {
-          alert('Failed to send OTP. Please check the number.');
-        }
-      })
-      .catch((err) => {
-        console.error('Error sending OTP:', err);
-        alert('Failed to send OTP. Please try again.');
-      });
-  };
-
-  const verifyOtp = () => {
-    if (!formData.phoneNumber || !userOtp) {
-      alert('Please enter both phone number and OTP.');
+  const setupRecaptcha = () => {
+    if (window.recaptchaVerifier) {
       return;
     }
 
-    fetch('http://localhost:5000/verify-otp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: formData.phoneNumber, code: userOtp }),
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        if (data.toLowerCase().includes('verified')) {
-          setOtpVerified(true);
-          alert('OTP Verified Successfully!');
-        } else {
-          alert('Incorrect OTP. Please try again.');
-        }
-      })
-      .catch((err) => {
-        console.error('Error verifying OTP:', err);
-        alert('Error verifying OTP. Please try again.');
-      });
+    // Set up reCAPTCHA verifier
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      size: 'invisible',
+      callback: (response) => {
+        console.log('reCAPTCHA solved', response);
+      },
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendOtp();
+  const sendOtp = async () => {
+    if (!phone) {
+      alert('Please enter a phone number');
+      return;
+    }
+
+    // Remove country code if it's entered by the user (keep only the local number)
+    const phoneNumber = `+91${phone.replace(/^(\+91|\d{1,4})/, '')}`;
+
+    // Set up reCAPTCHA before OTP request
+    setupRecaptcha();
+    const appVerifier = window.recaptchaVerifier;
+
+    try {
+      // Send OTP to the entered phone number
+      const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+      setConfirmation(confirmationResult);
+      alert('OTP sent');
+    } catch (error) {
+      console.error('Error sending OTP', error);
+      alert('Failed to send OTP. Make sure the phone number is correct and reCAPTCHA is solved.');
+    }
+  };
+
+  const verifyOtp = async () => {
+    if (!otp) {
+      alert('Please enter the OTP you received');
+      return;
+    }
+
+    try {
+      await confirmation.confirm(otp);
+      alert('Phone number verified successfully!');
+      // You can now register the user or navigate to the next step.
+    } catch (error) {
+      alert('Invalid OTP');
+    }
   };
 
   return (
-    <>
-      {/* <Heading /> */}
-      <div className="container">
-        <h2 className="text-light font-mont">Register</h2>
-        <div className="row col-12-ld text-center">
-          {!otpSent && !otpVerified && (
-            <form onSubmit={handleSubmit} className="flex flex-column jcsa">
-              <div>
-                <label>Name:</label>
-                <br/>
+    <div className='container col-8'>
+      <div className="row">
+        <h2>Phone Verification</h2>
+        <input
+          type="text"
+          placeholder="Enter phone number without country code"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <button onClick={sendOtp}>Send OTP</button>
+        <br /><br />
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+        />
+        <button onClick={verifyOtp}>Verify OTP</button>
 
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div>
-                <label>Email:</label>
-                <br />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div>
-                <label>Password:</label>
-                <br />
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div>
-                <label>Phone Number:</label>
-                <br />
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <button type="submit">Register</button>
-            </form>
-          )}
-
-          {otpSent && !otpVerified && (
-            <div>
-              <p>Enter the OTP sent to your phone:</p>
-              <input
-                type="text"
-                value={userOtp}
-                onChange={(e) => setUserOtp(e.target.value)}
-              />
-              <button onClick={verifyOtp}>Verify OTP</button>
-            </div>
-          )}
-
-          {otpVerified && (
-            <div>
-              <h3>OTP Verified!</h3>
-              <p>You can now proceed with full registration or be redirected.</p>
-            </div>
-          )}
-        </div>
+        {/* Invisible reCAPTCHA container */}
+        <div id="recaptcha-container"></div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default Register;

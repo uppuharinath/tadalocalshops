@@ -1,5 +1,6 @@
 import { FaAngleDown } from "react-icons/fa";
 
+
 const Navbar = () => {
   const navItems = [
     { id: 1, name: "Home", path: "/", hasIcon: true },
@@ -9,16 +10,23 @@ const Navbar = () => {
   ];
 
   return (
-    <ul className="flex">
-      {navItems.map((item) => (
-        <li key={item.id} className="flex items-center">
-          <a href={item.path} className="flex cyan items-center">
-            {item.name}
-            {item.hasIcon && <FaAngleDown className="black" />}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div className="container ">
+          <div className="row">
+          <ul className="flex  col-6">
+            {navItems.map((item) => (
+              <li key={item.id} className="flex items-center">
+                <a href={item.path} className="flex  jcc aic items-center  font-mont white">
+                  {item.name}
+                  {item.hasIcon && <FaAngleDown className="white" />}
+                </a>
+              </li>
+            ))}
+           
+           </ul>
+
+
+          </div>
+    </div>
   );
 };
 
