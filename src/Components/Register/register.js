@@ -20,10 +20,10 @@ const Register = () => {
     }));
   };
 
-  const isValidPhoneNumber = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/;
-    return phoneRegex.test(phone);
-  };
+  // const isValidPhoneNumber = (phone) => {
+  //   const phoneRegex = /^[0-9]{10}$/;
+  //   return phoneRegex.test(phone);
+  // };
 
   const sendOtp = () => {
     const formattedPhone = `+91${formData.phoneNumber}`;

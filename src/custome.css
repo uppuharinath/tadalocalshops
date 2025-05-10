@@ -798,3 +798,11 @@ body {
   height: 100vh; /* full viewport height */
   box-sizing: border-box;
 }
+
+.backbutton {
+  position: fixed;
+  bottom: 2rem !important;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+}

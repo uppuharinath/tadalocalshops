@@ -4,21 +4,15 @@ import { useState } from "react";
 import CardOut from "../../src/cardout";
 import { FaHotel } from "react-icons/fa";
 import { TbAirConditioning } from "react-icons/tb";
-import { GiAutoRepair } from "react-icons/gi";
+import { GiAutoRepair, GiNoodles } from "react-icons/gi";
 import { PiBuildingApartmentDuotone } from "react-icons/pi";
 import { SlBasket } from "react-icons/sl";
-import { GiNoodles } from "react-icons/gi";
 
 const Body = ({ searchInput }) => {
   const [selectedRecord, setSelectedRecord] = useState(null);
 
-  const handleCardOut = (record) => {
-    setSelectedRecord(record);
-  };
-
-  const handleBack = () => {
-    setSelectedRecord(null);
-  };
+  const handleCardOut = (record) => setSelectedRecord(record);
+  const handleBack = () => setSelectedRecord(null);
 
   const highlightSearchTerm = (text, term) => {
     if (!term) return text;
@@ -32,16 +26,12 @@ const Body = ({ searchInput }) => {
     );
   };
 
-  const filteredRecords = records.filter((record) => {
-    if (searchInput && searchInput.trim()) {
-      return (
-        record.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-        record.type.toLowerCase().includes(searchInput.toLowerCase()) ||
-        record.description.toLowerCase().includes(searchInput.toLowerCase())
-      );
-    }
-    return true;
-  });
+  const filteredRecords = records.filter((record) =>
+    searchInput?.trim()
+      ? [record.name, record.type, record.description]
+          .some(field => field.toLowerCase().includes(searchInput.toLowerCase()))
+      : true
+  );
 
   const iconMap = {
     FaHotel: <FaHotel />,
@@ -52,7 +42,7 @@ const Body = ({ searchInput }) => {
     GiNoodles: <GiNoodles />,
   };
 
-  const uniqueCategories = [...new Set(records.map((record) => record.category))];
+  const uniqueCategories = [...new Set(records.map((r) => r.category))];
 
   return (
     <div className="container">
@@ -63,7 +53,7 @@ const Body = ({ searchInput }) => {
       ) : (
         <div className="category-container">
           {uniqueCategories.map((category) => (
-            <div key={category} className="category-block ">
+            <div key={category} className="category-block">
               <h2 className="text-center yellow black bg-blue box-shadow1">{category}s</h2>
               <div className="row jcsa asasas allcards">
                 {filteredRecords
@@ -71,9 +61,9 @@ const Body = ({ searchInput }) => {
                   .map((record) => (
                     <div
                       key={record.id}
-                      className="col-3-ld col-12-md col-12-sd mb-1r relative  cards flex jcc box-shadow1 mt-1r"
+                      className="col-3-ld col-12-md col-12-sd mb-1r relative cards flex jcc box-shadow1 mt-1r"
                     >
-                      <div className="icon flex jcc aic pink white ">
+                      <div className="icon flex jcc aic pink white">
                         <div className="items flex flex-column jcsa white p-0">
                           <div className="text-center w-100">
                             <span className="white">
@@ -97,31 +87,19 @@ const Body = ({ searchInput }) => {
                             <div className="col-12-ld flex jcc jcsa location black font-sofia">
                               {record.location && (
                                 <div className="col-3-ld">
-                                  <a
-                                    href={record.location}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
+                                  <a href={record.location} target="_blank" rel="noopener noreferrer">
                                     Locate
                                   </a>
                                 </div>
                               )}
-
                               {record.website && record.website !== "NA" && (
                                 <div className="col-3-ld">
-                                  <a
-                                    href={record.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
+                                  <a href={record.website} target="_blank" rel="noopener noreferrer">
                                     Website
                                   </a>
                                 </div>
                               )}
-
-                              {record.phone && (
-                                <div className="col-3-ld">{record.phone}</div>
-                              )}
+                              {record.phone && <div className="col-3-ld">{record.phone}</div>}
                             </div>
                           </div>
 

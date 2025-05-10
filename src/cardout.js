@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,7 +7,6 @@ const CardOut = ({ record, onBack }) => {
   const sliderRef = useRef(null);
   const fullscreenRef = useRef(null);
 
-  // Combine bannerimage + other photos for fullscreen logic
   const allPhotos = [record.bannerimage, ...record.photos.filter((photo) => photo !== record.bannerimage)];
 
   const [fullscreenData, setFullscreenData] = useState({
@@ -19,67 +18,49 @@ const CardOut = ({ record, onBack }) => {
   const imgClick = (photo, index) => {
     setFullscreenData({
       img: photo,
-      index: index,
+      index,
       isZoomed: false,
     });
     sliderRef.current?.slickPause();
   };
 
-  const navigateImage = (direction) => {
-    if (fullscreenData.index === null) return;
+  const navigateImage = useCallback(
+    (direction) => {
+      if (fullscreenData.index === null) return;
+      const total = allPhotos.length;
+      const newIndex = direction === "prev"
+        ? (fullscreenData.index - 1 + total) % total
+        : (fullscreenData.index + 1) % total;
+      setFullscreenData({
+        img: allPhotos[newIndex],
+        index: newIndex,
+        isZoomed: false,
+      });
+    },
+    [fullscreenData.index, allPhotos]
+  );
 
-    let newIndex;
-    if (direction === "prev") {
-      newIndex = (fullscreenData.index - 1 + allPhotos.length) % allPhotos.length;
-    } else {
-      newIndex = (fullscreenData.index + 1) % allPhotos.length;
-    }
-
-    setFullscreenData({
-      img: allPhotos[newIndex],
-      index: newIndex,
-      isZoomed: false,
-    });
-  };
-
-  const closeFullscreen = () => {
-    setFullscreenData({
-      img: null,
-      index: null,
-      isZoomed: false,
-    });
+  const closeFullscreen = useCallback(() => {
+    setFullscreenData({ img: null, index: null, isZoomed: false });
     sliderRef.current?.slickPlay();
-  };
+  }, []);
 
-  const toggleZoom = () => {
-    setFullscreenData((prev) => ({
-      ...prev,
-      isZoomed: !prev.isZoomed,
-    }));
-  };
+  const toggleZoom = useCallback(() => {
+    setFullscreenData((prev) => ({ ...prev, isZoomed: !prev.isZoomed }));
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!fullscreenData.img) return;
 
-      switch (e.key) {
-        case "ArrowLeft":
-          navigateImage("prev");
-          break;
-        case "ArrowRight":
-          navigateImage("next");
-          break;
-        case "Escape":
-          closeFullscreen();
-          break;
-        default:
-          break;
-      }
+      if (e.key === "ArrowLeft") navigateImage("prev");
+      if (e.key === "ArrowRight") navigateImage("next");
+      if (e.key === "Escape") closeFullscreen();
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [fullscreenData]);
+  }, [fullscreenData.img, navigateImage, closeFullscreen]);
 
   const settings = {
     dots: true,
@@ -93,9 +74,8 @@ const CardOut = ({ record, onBack }) => {
 
   return (
     <div className="container">
-      <div className="row vh-80 ">
+      <div className="row vh-80">
         <div className="col-6-ld box-shadow1 recorddetails">
-          
           <h2 className="text-center purple">{record.name}</h2>
 
           <div className="about">
@@ -105,163 +85,118 @@ const CardOut = ({ record, onBack }) => {
 
           <div className="locate">
             <h3 className="white">Location</h3>
-            <p> Route - {record.address} towards {record.towards}  Side</p>
-            <p>location : <a href={record.location} target="_blank" rel="noopener noreferrer">View Map</a></p>
+            <p>Route - {record.address} towards {record.towards} Side</p>
+            <p>Location: <a href={record.location} target="_blank" rel="noopener noreferrer">View Map</a></p>
           </div>
-          
-        
 
           <div className="contact white">
-          <h3 className="white">Contact </h3>
-              <p><a className="contact white" href={`tel:${record.phone}`}>{record.phone}</a></p>
-              <p><a href={record.website} target="_blank" rel="noopener noreferrer">{record.website}</a></p>
+            <h3 className="white">Contact</h3>
+            <p><a className="contact white" href={`tel:${record.phone}`}>{record.phone}</a></p>
+            <p><a href={record.website} target="_blank" rel="noopener noreferrer">{record.website}</a></p>
           </div>
-          
-          
 
-          <div className="open ">
-            <h3 className="white">Operating Hours </h3>
+          <div className="open">
+            <h3 className="white">Operating Hours</h3>
             <p>{record.open_hours}</p>
           </div>
 
-
-          {record.specialties && record.specialties.length > 0 && (
+          {record.specialties?.length > 0 && (
             <div className="specialties">
               <h3 className="white">Specialties</h3>
-              {record.specialties.map((item, index) => (
-                <p key={index}> {item}</p>
+              {record.specialties.map((item, index) => <p key={index}>{item}</p>)}
+            </div>
+          )}
+
+          {record.popular_brands?.length > 0 && (
+            <div className="popular-brands">
+              <h3 className="white">Popular Brands</h3>
+              {record.popular_brands.map((brand, index) => <p key={index}>{brand}</p>)}
+            </div>
+          )}
+
+          {record.services?.length > 0 && (
+            <div className="services">
+              <h3 className="white">Services</h3>
+              {record.services.map((service, index) => (
+                <p key={index}>{service.name} ({service.type})</p>
               ))}
             </div>
           )}
 
-        {record.popular_brands && record.popular_brands.length > 0 && (
-          <div className="popular-brands">
-            <h3 className="white">Popular Brands</h3>
-            {record.popular_brands.map((brand, index) => (
-              <p key={index}>{brand}</p>
-            ))}
-          </div>
-        )}
-       
+          {record.payment_methods?.length > 0 && (
+            <div className="payment-methods">
+              <h3 className="white">Payment Methods</h3>
+              {record.payment_methods.map((method, index) => <p key={index}>{method}</p>)}
+            </div>
+          )}
 
+          {record.tags?.length > 0 && (
+            <div className="tags">
+              <h3 className="white">Tags</h3>
+              {record.tags.map((tag, index) => <p key={index}>{tag}</p>)}
+            </div>
+          )}
 
+          {record.parking && (
+            <div className="parking">
+              <h3 className="white">Parking</h3>
+              <p>{record.parking}</p>
+            </div>
+          )}
 
-       {record.services && record.services.length > 0 && (
-  <div className="services">
-    <h3 className="white">Services</h3>
-    {record.services.map((service, index) => (
-      <p key={index}>{service.name} ({service.type})</p>
-    ))}
-  </div>
-)}
+          {record.offers && (
+            <div className="offers">
+              <h3 className="white">Offers</h3>
+              <p>{record.offers}</p>
+            </div>
+          )}
 
+          {record.rating && (
+            <div className="rating">
+              <h3 className="white">Rating</h3>
+              <p>{record.rating} ⭐</p>
+            </div>
+          )}
+        </div>
 
-{record.payment_methods && record.payment_methods.length > 0 && (
-  <div className="payment-methods">
-    <h3 className="white">Payment Methods</h3>
-    {record.payment_methods.map((method, index) => (
-      <p key={index}>{method}</p>
-    ))}
-  </div>
-)}
-
-
-
-{record.tags && record.tags.length > 0 && (
-  <div className="tags">
-    <h3 className="white">Tags</h3>
-    {record.tags.map((tag, index) => (
-      <p key={index}>{tag}</p>
-    ))}
-  </div>
-)}
-
-
-{record.parking && (
-  <div className="parking">
-    <h3 className="white">Parking</h3>
-    <p>{record.parking}</p>
-  </div>
-)}
-
-{record.offers && (
-  <div className="offers">
-    <h3 className="white">Offers</h3>
-    <p>{record.offers}</p>
-  </div>
-)}
-
-{record.rating && (
-  <div className="rating">
-    <h3 className="white">Rating</h3>
-    <p>{record.rating} ⭐</p>
-  </div>
-)}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-        <div className="cardoutimages   col-6-ld">
-
-          {/* Banner Image */}
-          <div className="box-shadow1 bannerimage ">
+        <div className="cardoutimages col-6-ld">
+          <div className="box-shadow1 bannerimage">
             <img
               src={record.bannerimage}
               alt="Banner"
               onClick={() => imgClick(record.bannerimage, 0)}
-            
             />
           </div>
 
-<div className="container  slideimages ">
-          <Slider ref={sliderRef} {...settings}>
-            {allPhotos.slice(1).map((photo, index) => (
-              <div key={index} className=" slidingimages">
-                <img
-                  src={photo}
-                  className="fluid slide-image"
-                  id={`photo-${index}`}
-                  alt={`${record.name} view ${index + 1}`}
-                  onClick={() => imgClick(photo, index + 1)} // +1 because banner is at index 0
-                  loading="lazy"
-                 
-                />
-              </div>
-            ))}
-          </Slider>
-</div>
-
-          
+          <div className="container slideimages">
+            <Slider ref={sliderRef} {...settings}>
+              {allPhotos.slice(1).map((photo, index) => (
+                <div key={index} className="slidingimages">
+                  <img
+                    src={photo}
+                    className="fluid slide-image"
+                    id={`photo-${index}`}
+                    alt={`${record.name} view ${index + 1}`}
+                    onClick={() => imgClick(photo, index + 1)}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
         </div>
       </div>
 
       <div className="flex jcc aic text-center m-auto">
-        <button className="btn btn-secondary mt-3" onClick={onBack}>
-          Back
-        </button>
+      <button
+  className={`btn btn-secondary backbutton ${fullscreenData.img ? "d-none" : ""}`}
+  onClick={onBack}
+>
+  Back
+</button>
       </div>
 
-      {/* Fullscreen Viewer */}
+      {/* Fullscreen viewer */}
       {fullscreenData.img && (
         <div
           className="fullscreen"
