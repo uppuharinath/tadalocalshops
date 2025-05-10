@@ -792,8 +792,8 @@ background-color: rgba(0, 0, 0, 0.071);
 
 
 body {
-  background: #000 !important; /* optional background color */
-  border: 20px solid white !important;
+  background: green !important; /* optional background color */
+  border: 50px solid red !important;
   margin: 0; /* often needed to prevent unwanted spacing */
   height: 100vh; /* full viewport height */
   box-sizing: border-box;
