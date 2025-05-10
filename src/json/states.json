@@ -1,0 +1,16 @@
+[
+  {
+    "state": "Maharashtra",
+    "price": 1200,
+    "discount": "15% off"
+  },
+  {
+    "state": "Karnataka",
+    "price": 9560,
+    "discount": "10% off"
+  },{
+    "state": "Andhra Pradesh",
+    "price": 9550,
+    "discount": "10% off"
+  }
+]

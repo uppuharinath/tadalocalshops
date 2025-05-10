@@ -1,0 +1,509 @@
+[
+  {
+    "town": "TADA",
+    "id": "Sumathi",
+    "name": "Hotel Sumathi",
+    "category": "Hotel/Restaurant",
+    "description": "Family-friendly hotel serving a wide variety of delicious vegetarian and non-vegetarian dishes with clean ambiance and quick service.",
+    "address": "Tada to Kalahasti ",
+    "towards": "Left",
+    "location": "https://maps.app.goo.gl/zBaFzyvQ446BsMuR6",
+    "phone": "9959197369",
+    "website": "https://hotelsumathi.example.com",
+    "open_hours": "9 AM TO 5 PM",
+    "specialties": [
+      "Food served with banana leaf",
+      "Authentic South Indian flavors",
+      "Friendly and quick service"
+    ],
+    "popular_brands": [
+      "Sumathi Special Meals",
+      "Tiffin Combos"
+    ],
+    "photos": [
+      "/sumathi_hotel/1.jpg",
+      "/sumathi_hotel/2.jpg",
+      "/sumathi_hotel/3.jpg",
+      "/sumathi_hotel/4.jpg",
+      "/sumathi_hotel/5.jpg",
+      "/sumathi_hotel/6.jpg",
+      "/sumathi_hotel/7.jpg",
+      "/sumathi_hotel/8.jpg",
+      "/sumathi_hotel/9.jpg"
+    ],
+    "bannerimage": [
+      "/sumathi_hotel/4.jpg"
+        ],
+
+    "services": [
+      {
+        "name": "Dining",
+        "type": "Indoor"
+      },
+      {
+        "name": "Takeaway",
+        "type": "Counter"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI",
+      "Credit/Debit Cards"
+    ],
+   
+    "tags": [
+      "South Indian",
+      "Budget-friendly",
+      "Family-friendly"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "10% off on lunch combos every Friday",
+    "rating": "4.3",
+    "icon": "FaHotel",
+    "type": "Hotel"
+  },
+  {
+    "town": "TADA",
+  "id": "Swathi Residency",
+  "name": "Swathi Residency",
+  "category": "Hotel/Restaurant",
+  "description": "Swathi Residency is a 3-star hotel offering comfortable accommodation and authentic South Indian cuisine.",
+  "address": "Tada to Nellore",
+  "towards": "right",
+  "location": "https://maps.app.goo.gl/zBaFzyvQ446BsMuR6",
+  "phone": "7382938566",
+  "website": "https://www.swathigrand.com",
+  "open_hours": "Check-in: 12 PM, Check-out: 12 PM",
+  "specialties": [
+    "Multi-cuisine restaurant with authentic South Indian flavors",
+    "Comfortable and well-furnished rooms",
+    "Proximity to Tada Railway Station and NH-5"
+  ],
+  "popular_brands": [
+    "Swathi Special Meals",
+    "Tiffin Combos"
+  ],
+  "photos": [
+    "/Swathi_Residency/2.jpg",
+    "/Swathi_Residency/3.jpg",
+    "/Swathi_Residency/4.jpg",
+    "/Swathi_Residency/5.jpg",
+    "/Swathi_Residency/6.jpg",
+    "/Swathi_Residency/7.jpg",
+    "/Swathi_Residency/8.jpg",
+    "/Swathi_Residency/9.jpg",
+    "/Swathi_Residency/10.jpg",
+    "/Swathi_Residency/11.jpg",
+    "/Swathi_Residency/12.jpg"
+  ],
+  "bannerimage": [
+    "/Swathi_Residency/1.jpg"
+  ],
+  "services": [
+    {
+      "name": "Dining",
+      "type": "Indoor"
+    },
+    {
+      "name": "Takeaway",
+      "type": "Counter"
+    },
+    {
+      "name": "Room Service",
+      "type": "24/7"
+    },
+    {
+      "name": "Housekeeping",
+      "type": "Daily"
+    },
+    {
+      "name": "Laundry Service",
+      "type": "On Request"
+    }
+  ],
+  "payment_methods": [
+    "Cash",
+    "UPI",
+    "Credit/Debit Cards"
+  ],
+  "parking": "Available - Street Parking",
+  "offers": "10% off on lunch combos every Friday",
+  "tags": [
+    "South Indian",
+    "Budget-friendly",
+    "Family-friendly",
+    "Free Wi-Fi",
+    "Air-conditioned Rooms"
+  ],
+  "rating": "3.7",
+  "icon": "FaHotel",
+  "type": "Hotel"
+    
+  },
+  {
+    "town": "TADA",
+    "id": "Gopal Plumbing",
+    "name": "Gopal Plumbing",
+    "category": "Plumber",
+    "description": "Gopal is a trusted plumber offering expert services for both residential and commercial needs.",
+    "address": "Tada to Nellore",
+    "towards": "left",
+    "location": "https://maps.app.goo.gl/zBaFzyvQ446BsMuR6",
+    "phone": "7382938566",
+    "website": "https://www.gopalplumbing.com",
+    "open_hours": "9 AM to 6 PM",
+    "specialties": [
+      "Leak repairs",
+      "Pipe installation and maintenance",
+      "Water heater servicing",
+      "Drain cleaning"
+    ],
+    "popular_services": [
+      "Leak repairs",
+      "Pipe replacements"
+    ],
+    "photos": [
+      "/Gopal/1.jpg",
+      "/Gopal/2.jpg",
+      "/Gopal/3.jpg"
+    ],
+    "bannerimage": [
+      "/Gopal/4.jpg"
+    ],
+    "services": [
+      {
+        "name": "Leak Repairs",
+        "type": "Emergency"
+      },
+      {
+        "name": "Pipe Installation",
+        "type": "Residential/Commercial"
+      },
+      {
+        "name": "Water Heater Servicing",
+        "type": "Maintenance"
+      },
+      {
+        "name": "Drain Cleaning",
+        "type": "Scheduled"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI",
+      "Credit/Debit Cards"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "10% off on first-time plumbing services",
+    "tags": [
+      "Plumbing",
+      "Emergency Services",
+      "Affordable",
+      "Reliable"
+    ],
+    "rating": "4.5",
+    "icon": "GiAutoRepair",
+    "type": "Plumber"
+  },
+  {
+    "town": "TADA",
+    "id": "Jai Super Market",
+    "name": "Jai Super Market",
+    "category": "Supermarket",
+    "description": "Jai Super Market offers a wide range of groceries, vegetables, and daily essentials, ensuring fresh and quality products.",
+    "address": "Tada to Nellore ",
+    "towards": "Left",
+    "location": "https://maps.app.goo.gl/SzuiF8NeVfBRjPrr8",
+    "phone": "9784503939",
+    "website": "https://www.jaisupermarket.com",
+    "open_hours": "8 AM to 9 PM",
+    "specialties": [
+      "Fresh vegetables and fruits",
+      "Quality groceries",
+      "Daily essentials"
+    ],
+    "popular_brands": [
+      "Aashirvaad",
+      "Tata Sampann",
+      "Britannia"
+    ],
+    "photos": [
+      
+      "/Jai_Super_Market/2.jpg",
+      "/Jai_Super_Market/3.jpg",
+      "/Jai_Super_Market/4.jpg",
+      "/Jai_Super_Market/5.jpg",
+      "/Jai_Super_Market/6.jpg",
+      "/Jai_Super_Market/7.jpg"
+    ],
+    "bannerimage": [
+      "/Jai_Super_Market/1.jpg"
+    ],
+    "services": [
+      {
+        "name": "Grocery Shopping",
+        "type": "In-store"
+      },
+      {
+        "name": "Home Delivery",
+        "type": "Online"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI",
+      "Credit/Debit Cards"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "5% off on first purchase for new customers",
+    "tags": [
+      "Grocery",
+      "Fresh Produce",
+      "Convenience",
+      "Affordable"
+    ],
+    "rating": "4.2",
+    "icon": "SlBasket",
+    "type": "Supermarket"
+  },
+  {
+    "town": "TADA",
+    "id": "Chaitanya Mess",
+    "name": "Chaitanya Mess",
+    "category": "Hotel/Restaurant",
+    "description": "A variety of traditional Indian dishes with vegetarian options, known for its delicious fish curry, fried fish, and prawns.",
+    "address": "Nellore to Tada",
+    "towards": "left",
+    "phone": "8623249999",
+    "open_hours": "11 AM to 10 PM",
+    "specialties": [
+      "Fish Curry Meal",
+      "Fried Fish",
+      "Prawns"
+    ],
+    "photos": [
+      "/Chaitanya_Mess/2.jpg",
+      "/Chaitanya_Mess/3.jpg",
+      "/Chaitanya_Mess/4.jpg",
+      "/Chaitanya_Mess/5.jpg",
+      "/Chaitanya_Mess/6.jpg",
+      "/Chaitanya_Mess/7.jpg",
+      "/Chaitanya_Mess/8.jpg",
+      "/Chaitanya_Mess/9.jpg",
+      "/Chaitanya_Mess/10.jpg",
+      "/Chaitanya_Mess/11.jpg",
+      "/Chaitanya_Mess/12.jpg",
+      "/Chaitanya_Mess/13.jpg"
+    ],
+    "bannerimage": [
+      "/Chaitanya_Mess/1.jpg"
+    ],
+    "services": [
+      {
+        "name": "Dine-in",
+        "type": "In-store"
+      },
+      {
+        "name": "Takeout",
+        "type": "In-store"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "Special discounts on seafood combos during weekends",
+    "tags": [
+      "Indian",
+      "Vegetarian",
+      "Seafood",
+      "Affordable"
+    ],
+    "rating": "4.0",
+    "icon": "GiNoodles",
+    "type": "Restaurant"
+  },
+  {
+    "town": "TADA",
+    "id": "Gokul Super Market",
+    "name": "Gokul Super Market",
+    "category": "Supermarket",
+    "description": "Gokul Super Market offers a wide range of groceries, vegetables, and daily essentials, ensuring fresh and quality products.",
+    "address": "Tada to Kalahasti ",
+    "towards": "Left",
+    "location": "https://maps.app.goo.gl/DcdvdBmP1hKu7u8i9",
+    "phone": "9784503939",
+    "website": "https://www.jaisupermarket.com",
+    "open_hours": "8 AM to 9 PM",
+    "specialties": [
+      "Fresh vegetables and fruits",
+      "Quality groceries",
+      "Daily essentials"
+    ],
+    "popular_brands": [
+      "Aashirvaad",
+      "Tata Sampann",
+      "Britannia"
+    ],
+    "photos": [
+      
+      "/Gokul_Super_Market/2.jpg",
+      "/Gokul_Super_Market/3.jpg",
+      "/Gokul_Super_Market/4.jpg",
+      "/Gokul_Super_Market/5.jpg",
+      "/Gokul_Super_Market/6.jpg",
+      "/Gokul_Super_Market/7.jpg"
+    ],
+    "bannerimage": [
+      "/Gokul_Super_Market/1.jpg"
+    ],
+    "services": [
+      {
+        "name": "Grocery Shopping",
+        "type": "In-store"
+      },
+      {
+        "name": "Home Delivery",
+        "type": "Online"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI",
+      "Credit/Debit Cards"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "5% off on first purchase for new customers",
+    "tags": [
+      "Grocery",
+      "Fresh Produce",
+      "Convenience",
+      "Affordable"
+    ],
+    "rating": "4.4",
+    "icon": "SlBasket",
+    "type": "Supermarket"
+  },
+  {
+    "town": "TADA",
+    "id": "Legends Super Market",
+    "name": "Legends Super Market",
+    "category": "Supermarket",
+    "description": "Legends Super Market offers a wide range of groceries, vegetables, and daily essentials, ensuring fresh and quality products.",
+    "address": "Nellore to Tada",
+    "towards": "left",
+    "phone": "9014515125",
+    "website": "https://www.jaisupermarket.com",
+    "open_hours": "8 AM to 9 PM",
+    "specialties": [
+      "Fresh vegetables and fruits",
+      "Quality groceries",
+      "Daily essentials"
+    ],
+    "popular_brands": [
+      "Aashirvaad",
+      "Tata Sampann",
+      "Britannia"
+    ],
+    "photos": [
+      
+      "/Legends_Super_Market/2.jpg",
+      "/Legends_Super_Market/3.jpg",
+      "/Legends_Super_Market/4.jpg",
+      "/Legends_Super_Market/5.jpg",
+      "/Legends_Super_Market/6.jpg",
+      "/Legends_Super_Market/7.jpg",
+      "/Legends_Super_Market/8.jpg"
+    ],
+    "bannerimage": [
+      "/Legends_Super_Market/1.jpg"
+    ],
+    "services": [
+      {
+        "name": "Grocery Shopping",
+        "type": "In-store"
+      },
+      {
+        "name": "Home Delivery",
+        "type": "Online"
+      }
+    ],
+    "payment_methods": [
+      "Cash",
+      "UPI",
+      "Credit/Debit Cards"
+    ],
+    "parking": "Available - Street Parking",
+    "offers": "5% off on first purchase for new customers",
+    "tags": [
+      "Grocery",
+      "Fresh Produce",
+      "Convenience",
+      "Affordable"
+    ],
+    "rating": "4.7",
+    "icon": "SlBasket",
+    "type": "Supermarket",
+    "location": "https://maps.app.goo.gl/WVM8Yn2ujF77GdsZ6"
+},
+{
+  "town": "TADA",
+  "id": "New Punjabi Dhaba",
+  "name": "New Punjabi Dhaba",
+  "category": "Hotel/Restaurant",
+  "description": "It offers a variety of authentic Punjabi dishes with veg and non-veg, known for its rich and flavorful curries, parathas, and tandoori.",
+  "address": "Nellore to Tada",
+  "towards": "Left",
+  "phone": "9001234567",
+  "open_hours": "10 AM to 11 PM",
+  "specialties": [
+    "Butter Chicken",
+    "Dal Makhani",
+    "Tandoori Roti",
+    "Paneer Tikka"
+  ],
+  "photos": [
+    
+    "/New_Punjabi_Dhaba/capture2.jpg",
+    "/New_Punjabi_Dhaba/capture3.jpg",
+    "/New_Punjabi_Dhaba/capture4.jpg",
+    "/New_Punjabi_Dhaba/capture5.jpg",
+    "/New_Punjabi_Dhaba/capture6.jpg",
+    "/New_Punjabi_Dhaba/capture7.jpg",
+    "/New_Punjabi_Dhaba/capture8.jpg"
+  ],
+  "bannerimage":"/New_Punjabi_Dhaba/capture1.jpg",
+  "services": [
+    {
+      "name": "Dine-in",
+      "type": "In-store"
+    },
+    {
+      "name": "Takeout",
+      "type": "In-store"
+    }
+  ],
+  "payment_methods": [
+    "Cash",
+    "UPI",
+    "Credit/Debit Cards"
+  ],
+  "parking": "Available - Street Parking",
+  "offers": "Free dessert with every family meal",
+  "tags": [
+    "Punjabi",
+    "North Indian",
+    "Vegetarian",
+    "Non-Vegetarian",
+    "Affordable"
+  ],
+  "rating": "4.2",
+  "icon": "GiNoodles",
+  "type": "Restaurant",
+  "location": "https://maps.app.goo.gl/xyz123"
+}
+  
+    
+]
+

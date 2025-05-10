@@ -1,0 +1,21 @@
+[
+  {
+    "name": "GOKUL SUPER MARKET",
+    "category": "Grocery store",
+    "description": "",
+    "address": "SRIKALAHASTHI ROAD, Andhra Pradesh 524401",
+    "location_link": "https://maps.app.goo.gl/wMmYXaXh2yXXLVJS7",
+    "phone": "",
+    "website": "",
+    "open_hours": "Mon-Sun | 6 AM – 12 PM",
+    "specialties": [],
+    "popular_brands": [],
+    "photos": [],
+    "services": ["Home Delivery"],
+    "payment_methods": ["Cash", "Card", "UPI"],
+    "parking": "Ample Free Parking Available",
+    "offers": "",
+    "tags": ["Premium", "Popular"],
+    "rating": "4.8"
+  }
+]

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;700&family=Sofia+Sans+Condensed:wght@400;700&display=swap');
+:root {
+  /* 🖋️ Font Families */
+  --font-Mont: 'Montserrat', sans-serif;
+  --font-Rale: 'Raleway', sans-serif;
+  --font-Sofia: 'Sofia Sans Condensed', sans-serif;
+}
+
+.mont{
+  font-family: var(--font-Mont);
+}
+.rale{
+  font-family: var(--font-Rale);
+}
+
+.sofia{
+  font-family: var(--font-Sofia);
+}

@@ -1,0 +1,19 @@
+:root {
+  /* 🎨 Primary Colors */
+  --primary-color: #47C9E5;
+  --border: #e9e9e9;
+  --gray: #8D8D8D;
+  --gray-dark: #343a40;
+  --light: #f8f9fa;
+  --dark: #343a40;
+
+  /* 🖋️ Font Families */
+  --font-Mont: 'Montserrat', sans-serif;
+  --font-Rale: 'Raleway', sans-serif;
+  --font-Sofia: 'Sofia Sans Condensed', sans-serif;
+
+  /* 🌟 Box Shadows */
+  --box-shadow1: 0 0 1.2rem #faf3f37a;
+  --box-shadow2: 0.5rem 0.5rem #c489b2df;
+  --box-shadow3: -5px -5px hsla(316, 79%, 41%, 0.906);
+}

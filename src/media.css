@@ -1,0 +1,48 @@
+@import './variables.css';
+
+/* NORMAL MEDIA */
+@media(min-width:0px){
+
+
+}
+
+@media(min-width:576px){
+
+}
+
+@media(min-width:768px){
+
+}
+
+@media (min-width: 1200px){
+
+}
+
+@media (max-width: 600px){
+  .allcards {
+    display: flex;
+    flex-direction: row;
+    justify-content: left !important;
+    flex-wrap: nowrap;       /* 👈 important: no wrapping! */
+    overflow-x: auto;         /* 👈 important: allow scroll right */
+    scroll-behavior: smooth;  /* optional */
+    margin-top:-7%;
+  }
+  .allcards::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  .cards {
+    flex: 0 0 auto;            /* 👈 important: fixed width */
+    margin:2rem !important;
+    margin-left:0 !important;
+    margin-right:5vw !important;
+    width: 80vw !important;
+  }
+
+}
+/* END NORMAL MEDIA */
+
+
+
+
