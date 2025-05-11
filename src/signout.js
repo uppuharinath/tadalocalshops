@@ -22,6 +22,7 @@ const SignOutButton = () => {
       onClick={handleSignOut}
       disabled={isLoading}    
       aria-label="Sign out"
+      className='btn green'
     >
       {isLoading ? 'Signing Out...' : 'Sign Out'}
     </button>

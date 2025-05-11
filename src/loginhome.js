@@ -1,15 +1,21 @@
 import React from "react";
 import { useAuth } from "./contexts/auth";
 import SignOutButton from "./signout";
+
 const LoginHome = () => {
   const { currentUser, isLoading } = useAuth();
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className="blue">
-        Welcome{currentUser?.displayName ? `, ${currentUser.displayName}` : currentUser?.email ? `, ${currentUser.email}` : ""}! 
-        <button className="btn">
+      {currentUser && (
+        <div className="btn">
           <SignOutButton />
-        </button>
+        </div>
+      )}
     </div>
   );
 };
+
 export default LoginHome;
