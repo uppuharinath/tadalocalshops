@@ -47,6 +47,7 @@ const Body = ({ searchInput }) => {
   return (
     <div className=" container main">
       
+      
       <Heading />
       {selectedRecord ? (
         <CardOut record={selectedRecord} onBack={handleBack} />

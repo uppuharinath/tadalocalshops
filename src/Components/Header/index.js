@@ -1,6 +1,7 @@
 import Navbar from "../../Pages/navbar";
 import { MdSavedSearch } from "react-icons/md";
 import Navsidebar from "../../Pages/navsidebar";
+import LoginHome from "../../loginhome";
 // import Navigation from "../../Pages/navigation";
 // import CountryDropdown from "../CountryDropdown";
 // import { CiUser } from "react-icons/ci";
@@ -24,12 +25,15 @@ const Header = ({ searchInput, setSearchInput }) => {
   return (
     <div className="header-wrapper">
       <div className="container header">
-        <p className="text-center branding flex flex-column black jcsa jcc aic">
+        <div className="text-center branding flex flex-column black jcsa jcc aic">
           <div>
             <strong>TADA :</strong> List your business card for ₹ 100/-
           </div>
           <div>Contact : 9032163736</div>
-        </p>
+          <div>
+            <LoginHome />
+          </div>
+        </div>
       </div>
 
 
