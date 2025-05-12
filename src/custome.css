@@ -815,3 +815,50 @@ background-color: rgba(0, 0, 0, 0.071);
   margin:auto;
   margin-top:2rem;
 }
+
+.signinhere, .text-link{
+  border-bottom: 8px solid rgb(230, 246, 3);
+  border-radius: 50% !important;
+  margin-bottom:1rem !important;
+  
+  &&:hover{
+    border-bottom:5px solid rgb(239, 239, 9);
+  }
+}
+
+.mb-1r{
+  margin-bottom: 1rem;
+}
+
+.signupform{
+  padding:1rem 0.5rem !important;
+}
+.signupform input,.login-container input {
+  padding: 1rem 0.5rem;
+  width: 100% !important;
+  font-family: var(--font-Mont);
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.signupform input:hover, .login-container input:hover {
+  border: 1px solid red;
+}
+
+.signupform input:focus, .login-container input:focus {
+  border: 1px solid red;
+}
+
+.register-container,.login-container{
+  min-height:100dvh;
+  background-color: rgba(0, 0, 0, 0.052);
+}
+
+.b-1p{
+  border:1px solid #dadada
+}
+
+.login-container hr{
+  margin-top:2rem;
+}

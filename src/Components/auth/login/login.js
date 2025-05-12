@@ -16,15 +16,17 @@ const Login = () => {
 
   // Helper components
   const ForgotPasswordLink = () => (
-    <div className="forgot-password">
+    <div className="forgot-password mb-1r white">
       <Link 
         to="/forgot-password"
         state={{ from: location.state?.from }}
-        className="text-link"
+        className="text-link white"
       >
         Forgot password?
       </Link>
+      <hr/>
     </div>
+    
   );
 
   const RegisterLink = () => (
@@ -33,10 +35,11 @@ const Login = () => {
       <Link 
         to="/register" 
         state={{ from: location.state?.from }}
-        className="text-link"
+        className="text-link white"
       >
         Register
       </Link>
+      <hr/>
     </div>
   );
 
@@ -112,11 +115,14 @@ const onGoogleSignIn = async (e) => {
 
   // Render
   return (
-    <div className="login-container">
+    <div className="container login-container bg-black plpr-1r">
       <div className="login-card">
-        <h2 className="login-title">Login to View Best of Tada Local Services</h2>
-        
-        <form onSubmit={onSubmit} className="login-form">
+        <h2 className="login-title text-center pt-1r">Login to View Best of Tada Local Services</h2>
+        <hr/>
+       
+       <div className="row">
+        <div className="col-6">
+          <form onSubmit={onSubmit} className="login-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -153,18 +159,18 @@ const onGoogleSignIn = async (e) => {
           <button
             type="submit"
             disabled={isSigningIn}
-            className={`login-button ${isSigningIn ? 'loading' : ''}`}
+            className={`btn login-button ${isSigningIn ? 'loading' : ''}`}
             aria-busy={isSigningIn}
           >
             {isSigningIn ? (
               <>
-                <span className="spinner" aria-hidden="true"></span>
+                <span className="spinner btn" aria-hidden="true"></span>
                 Signing In...
               </>
             ) : 'Sign In'}
           </button>
 
-          <div className="divider">
+          <div className="divider mt-1r mb-1r pl-1r">
             <span>OR</span>
           </div>
 
@@ -190,10 +196,18 @@ const onGoogleSignIn = async (e) => {
     </>
   ) : 'Continue with Google'}
 </button>
+<hr/>
 
         </form>
+        </div>
+        <div className="col-6 flex jcc aic m-auto text-center register-link">
+          <RegisterLink />
+        </div>
+       </div>
+        
 
-        <RegisterLink />
+
+        
       </div>
     </div>
   );

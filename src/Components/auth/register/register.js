@@ -111,23 +111,25 @@ useEffect(() => {
     }
   };
 
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault();
-    if (isProcessing) return;
+ const handleGoogleSignIn = async (e) => {
+  e.preventDefault();
+  setErrorMessage('');
+  setIsProcessing(true);
 
-    setIsProcessing(true);
-    setErrorMessage('');
-    setSuccessMessage('');
-    
-    try {
-      await doSignInWithGoogle();
-      // Google sign-in will automatically redirect via the auth state listener
-    } catch (error) {
-      handleAuthError(error);
-    } finally {
-      setIsProcessing(false);
+  try {
+    const userCredential = await doSignInWithGoogle();
+
+    if (userCredential?.user?.emailVerified) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/verify-email', { replace: true });
     }
-  };
+  } catch (error) {
+    handleAuthError(error);
+  } finally {
+    setIsProcessing(false);
+  }
+};
 
   const handleAuthError = (error) => {
     let message = 'An error occurred. Please try again.';
@@ -164,7 +166,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="container ">
+    <div className="container bg-black plpr-1r register-container">
       <div className="row flex-column jcl">
         <div>
           <h2 className="w-80 ">
@@ -175,11 +177,13 @@ useEffect(() => {
             <Link 
               to="/login" 
               state={{ from: location.state?.from }} 
-              className="font-medium blue hover:text-indigo-500"
+              className="font-medium white signinhere  hover:text-indigo-500"
             >
               Sign in here
             </Link>
           </p>
+
+
         </div>
 
         {successMessage && (
@@ -223,7 +227,10 @@ useEffect(() => {
           </div>
         )}
 
-        <form className="mt-8 space-y-6" onSubmit={handleRegister}>
+       
+<div className="row signupform  ptpb-1r plpr-1r">
+        <div className="col-6-ld col-12-md col-12-sd col-12-sm"> 
+ <form className="w-100 flex flex-column text-center m-auto mb-1r" onSubmit={handleRegister}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="name" className="sr-only">Name</label>
@@ -234,7 +241,7 @@ useEffect(() => {
                 autoComplete="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mb-1r appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Full name (optional)"
               />
             </div>
@@ -249,7 +256,7 @@ useEffect(() => {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mb-1r appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
                 disabled={isProcessing}
               />
@@ -265,26 +272,11 @@ useEffect(() => {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mb-1r appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password (min 6 characters)"
                 disabled={isProcessing}
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
-              >
-                {showPassword ? (
-                  <svg className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                ) : (
-                  <svg className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                )}
-              </button>
+              
             </div>
 
             <div>
@@ -297,7 +289,7 @@ useEffect(() => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="mb-1r appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
                 disabled={isProcessing}
               />
@@ -308,7 +300,7 @@ useEffect(() => {
             <button
               type="submit"
               disabled={isProcessing}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn"
             >
               {isProcessing ? (
                 <>
@@ -320,14 +312,13 @@ useEffect(() => {
           </div>
         </form>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Or continue with</span>
-          </div>
         </div>
+        <div className=" col-6-ld col-12-md col-12-sd col-12-sm w-100  flex flex-column text-center m-auto "> 
+
+          <div className=" mb-1r">
+            <span className=" bg-green white p-1r flex jcc aic w-100 text-center">Or continue with</span>
+          </div>
+    
 
         <div>
           <button
@@ -342,9 +333,19 @@ useEffect(() => {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
             </svg>
-            Continue with Google
+            Continue with Google Signin
           </button>
         </div>
+
+        </div>
+</div>
+     
+        
+
+
+          
+
+
       </div>
     </div>
   );
