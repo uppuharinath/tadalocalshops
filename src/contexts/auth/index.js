@@ -10,11 +10,27 @@ import {
 
 const AuthContext = createContext();
 
+console.log("onAuthStateChanged: ")
+console.log(onAuthStateChanged)
+
+
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+console.log("onAuthStateChanged after login: ")
+console.log(onAuthStateChanged)
+console.log("currentUser after: ")
+console.log(currentUser)
+console.log("userLoggedIn after: ")
+console.log(userLoggedIn)
+console.log("isLoading after: ")
+console.log(isLoading)
+console.log("error after: ")
+console.log(error)
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -80,7 +96,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={value}>
       {!isLoading ? children : (
-        <div className="auth-loading-overlay">
+        <div className="auth-loading-overlay ">
           <div className="spinner"></div>
           <p>Loading authentication state...</p>
         </div>

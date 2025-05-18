@@ -7,12 +7,42 @@ import { GiAutoRepair, GiNoodles } from "react-icons/gi";
 import { PiBuildingApartmentDuotone } from "react-icons/pi";
 import { SlBasket } from "react-icons/sl";
 import Heading from "./heading";
+import { useAuth } from "../contexts/auth";
 
 const Body = ({ searchInput }) => {
+  const { userLoggedIn, currentUser } = useAuth();
   const [selectedRecord, setSelectedRecord] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
-  const handleCardOut = (record) => setSelectedRecord(record);
+   const handleCardOut = (record) => setSelectedRecord(record);
   const handleBack = () => setSelectedRecord(null);
+
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files).slice(0, 5);
+    setFiles(selectedFiles);
+  };
+
+ const handleUpload = () => {
+    if (files.length === 0) return;
+    
+      setIsUploading(true);
+    setUploadProgress(0);
+    
+     // Simulate upload progress
+    const interval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsUploading(false);
+          setFiles([]);
+          return 100;
+        }
+          return prev + 10;
+      });
+    }, 200);
+  };
 
   const highlightSearchTerm = (text, term) => {
     if (!term) return text;
@@ -45,21 +75,90 @@ const Body = ({ searchInput }) => {
   const uniqueCategories = [...new Set(records.map((r) => r.category))];
 
   return (
-    <div className=" container main">
-      
-      
+    <div className="container main">
       <Heading />
+      
+      {/* Upload Section for logged-in users */}
+      {userLoggedIn && (
+        <div className="upload-section container b-1px black">
+          <h3>Upload Your Business Photos</h3>
+          <p>Showcase your business with up to 5 photos</p>
+          
+          <div className="upload-area black">
+            <input 
+              type="file" 
+              id="business-photos"
+              accept="image/*" 
+              multiple 
+              onChange={handleFileChange}
+              disabled={isUploading}
+              style={{ display: 'none' }}
+            />
+            
+            <label htmlFor="business-photos" className="upload-label">
+              {files.length > 0 ? (
+                <div className="file-list ">
+                  <p>Selected {files.length} file(s):</p>
+                  <ul className="black">
+                    {files.map((file, index) => (
+                      <li key={index}>
+                        <span className="file-name">{file.name}</span>
+                        <span className="file-size">
+                          {(file.size / 1024).toFixed(1)} KB
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <div className="upload-prompt">
+                  <svg className="upload-icon" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                  </svg>
+                  <p>Click to select photos or drag and drop</p>
+                </div>
+              )}
+            </label>
+            
+            {files.length > 0 && (
+              <div className="upload-controls">
+                <button 
+                  onClick={handleUpload}
+                  disabled={isUploading}
+                  className="upload-button"
+                >
+                  {isUploading ? 'Uploading...' : 'Upload Photos'}
+                </button>
+                {!isUploading && (
+                  <button 
+                    onClick={() => setFiles([])}
+                    className="cancel-button"
+                  >
+                    Clear Selection
+                  </button>
+                )}
+              </div>
+            )}
+            
+            {isUploading && (
+              <div className="progress-container">
+                <div className="progress-bar" style={{ width: `${uploadProgress}%` }}></div>
+                <span className="progress-text">{uploadProgress}%</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {selectedRecord ? (
         <CardOut record={selectedRecord} onBack={handleBack} />
-                        ) 
-                        : 
-      
-                      (
+      ) : (
         <div className="category-container">
           {uniqueCategories.map((category) => (
             <div key={category} className="category-block">
               <h2 className="bg-blue">{category}s 
-               &nbsp; <span className="text-black">({filteredRecords.filter((record) => record.category === category).length}) </span></h2>
+                &nbsp; <span className="text-black">({filteredRecords.filter((record) => record.category === category).length}) </span>
+              </h2>
               <div className="row jcsa asasas allcards">
                 {filteredRecords
                   .filter((record) => record.category === category)

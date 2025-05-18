@@ -11,8 +11,6 @@ import { AuthProvider } from "./contexts/auth";
 import VerifyEmail from "./Components/auth/verifyemail/VerifyEmail";
 import ProtectedRoute from "./Components/auth/ProtectedRoute";
 
-
-
 function App() {
   const [searchInput, setSearchInput] = useState("");
   const [userProfile, setUserProfile] = useState(null);
@@ -23,17 +21,13 @@ function App() {
         <Header searchInput={searchInput} setSearchInput={setSearchInput} />
         <Routes>
           {/* Public Routes */}
-              <Route path="/" element={<Body />} />
-
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/verify-email" element={<VerifyEmail />} /> {/* Add this */}
-
+          <Route path="/" element={<Body searchInput={searchInput} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            {/* <Route path="/home" element={<Home />} /> */}
             <Route path="/profile" element={<Profile userProfile={userProfile} />} />
           </Route>
         </Routes>
